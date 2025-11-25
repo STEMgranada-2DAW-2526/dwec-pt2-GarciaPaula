@@ -1,4 +1,3 @@
-
 import { GameProvider } from './Context'
 
 export default function App() {
