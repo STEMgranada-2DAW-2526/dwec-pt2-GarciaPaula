@@ -16,7 +16,11 @@ function reducer(state, action) {
 
     let nuevoEstado = { ...state }
     
-
+    if (action.type === "CLICK_SHOOT") {
+        nuevoEstado.damagePerShot = state.damagePerShot + 1
+    } else if (action.type === "AUTO_SHOOT" && state.caramels >= upgradePrice) {
+        nuevoEstado.caramels = state.caramels - state.upgradePrice
+    
 
     return nuevoEstado
 }
