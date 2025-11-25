@@ -18,7 +18,7 @@ const INITIAL_STATE = {
 function reducer(state, action) {
 
     let estadoSalida = state;
-    
+
     if (action.type === "CLICK_SHOOT") {
         estadoSalida = {
             ...state,
@@ -39,29 +39,44 @@ function reducer(state, action) {
         }
     } else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= damageUpgradePrice) {
 
-        if (state.upgrades.lenght === 0){
-
-            estadoSalida = {
-            ...state,
-            caramels: state.caramels - damageUpgradePrice,
-            damagePerShotIncrease: state.damagePerShotIncrease + 2,
-            upgrades: ["increase1"]
-
-        } else if (state.upgrades.lenght === 1){
+        if (state.upgrades.lenght === 0) {
 
             estadoSalida = {
                 ...state,
                 caramels: state.caramels - damageUpgradePrice,
-                damagePerShotIncrease: state.damagePerShotIncrease + 3,
+                damageUpgradePrice: state.damageUpgradePrice + 30,
+                damagePerShotIncrease: state.damagePerShotIncrease + 2,
+                upgrades: ["increase1"]
+            }
+
+        } else if (state.upgrades.lenght === 1) {
+
+            estadoSalida = {
+                ...state,
+                caramels: state.caramels - damageUpgradePrice,
+                damageUpgradePrice: state.damageUpgradePrice + 50,
+                damagePerShotIncrease: state.damagePerShotIncrease + 5,
                 upgrades: [...state.upgrades, "increase2"]
             }
 
+        } else if (state.upgrades.lenght === 2) {
+
+            estadoSalida = {
+                ...state,
+                caramels: state.caramels - damageUpgradePrice,
+                damagePerShotIncrease: state.damagePerShotIncrease + 10,
+                upgrades: [...state.upgrades, "increase3"]
+            }
+        } 
+
+    } else if (action.type === "NEXT_WAVE" && state.damageDealt >= state.waveGoal) {
+        estadoSalida = {
+            ...state,
+            damageDealt: 0,
+            waveGoal: state.waveGoal + (state.numeroOleada * 1,10),
+            numeroOleada: state.numeroOleada + 1
         }
-
     }
-
-        
-    
 
     return estadoSalida
 }
