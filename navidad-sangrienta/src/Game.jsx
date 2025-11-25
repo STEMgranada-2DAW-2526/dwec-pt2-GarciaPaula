@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Context } from 'Context'
-import torre from '/assets/torre.png'
+import torre from './assets/torre.png'
 
 export default function Game() {
 
@@ -13,6 +13,8 @@ export default function Game() {
 
             <p >
                 Daño de Oleada: {damageDealt} / {waveGoal}
+                Caramelos: {caramels}
+                Oleada: {waveNumber}
             </p>
 
             <img

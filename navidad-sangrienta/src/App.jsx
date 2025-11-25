@@ -1,4 +1,6 @@
 import { GameProvider } from './Context'
+import Game from './Game.jsx'
+import UpgradesBoard from './UpgradesBoard.jsx'
 
 export default function App() {
 
