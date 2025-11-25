@@ -9,10 +9,10 @@ const INITIAL_STATE = {
     damagePerShot: 1,
     autoShotsPerSecond: 1,
     upgrades: [],
-    numeroOleada: 1,
+    waveNumber: 1,
     damageUpgradePrice: 15,
     damagePerShotIncrease: 0,
-    multiplierPrice: 1 // Esto es para mí para que me funcione. Luego lo tengo que cambiar para meterlo en upgrades
+    multiplierPrice: 1
 }
 
 function reducer(state, action) {
@@ -73,15 +73,15 @@ function reducer(state, action) {
         estadoSalida = {
             ...state,
             damageDealt: 0,
-            waveGoal: state.waveGoal + (state.numeroOleada * 1,10),
-            numeroOleada: state.numeroOleada + 1
+            waveGoal: state.waveGoal + (state.waveNumber * 1,10),
+            waveNumber: state.waveNumber + 1
         }
     }
 
     return estadoSalida
 }
 
-export function Provider({ children }) {
+export function GameProvider({ children }) {
 
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
 
@@ -94,7 +94,7 @@ export function Provider({ children }) {
     }, [])
 
     return (
-        <Context.Provider value={{
+        <Context.GameProvider value={{
             ...state,
             dispararManual: () => dispatch({ type: "CLICK_SHOOT" }),
             disparoAutomatico: () => dispatch({ type: "AUTO_SHOOT" }),
@@ -103,6 +103,6 @@ export function Provider({ children }) {
             siguienteOleada: () => dispatch({ type: "NEXT_WAVE" })
         }}>
             {children}
-        </Context.Provider>
+        </Context.GameProvider>
     )
 }
