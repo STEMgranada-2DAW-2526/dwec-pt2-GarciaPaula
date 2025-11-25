@@ -10,6 +10,8 @@ const INITIAL_STATE = {
     autoShotsPerSecond: 1,
     upgrades: [],
     numeroOleada: 1,
+    damageUpgradePrice: 15,
+    damagePerShotIncrease: 0,
     multiplierPrice: 1 // Esto es para mí para que me funcione. Luego lo tengo que cambiar para meterlo en upgrades
 }
 
@@ -36,6 +38,27 @@ function reducer(state, action) {
             autoShotsPerSecond: state.autoShotsPerSecond + 1
         }
     } else if (action.type === "BUY_DAMAGE_UPGRADE" && state.caramels >= damageUpgradePrice) {
+
+        if (state.upgrades.lenght === 0){
+
+            estadoSalida = {
+            ...state,
+            caramels: state.caramels - damageUpgradePrice,
+            damagePerShotIncrease: state.damagePerShotIncrease + 2,
+            upgrades: ["increase1"]
+
+        } else if (state.upgrades.lenght === 1){
+
+            estadoSalida = {
+                ...state,
+                caramels: state.caramels - damageUpgradePrice,
+                damagePerShotIncrease: state.damagePerShotIncrease + 3,
+                upgrades: [...state.upgrades, "increase2"]
+            }
+
+        }
+
+    }
 
         
     
