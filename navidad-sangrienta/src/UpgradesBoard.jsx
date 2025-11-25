@@ -6,3 +6,14 @@ import multiplicador from './assets/multiplicador.png'
 
 export default function UpgradesBoard() {
     return (
+
+        <div>
+            <h2>MEJORAS</h2>
+            <div>
+                <img src={canion} onClick={accion} />
+                <p >{nombre}</p>
+                <p> {damageUpgradePrice}</p>
+            </div>
+        </div>)
+
+}
