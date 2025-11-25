@@ -8,5 +8,41 @@ const INITIAL_STATE = {
     caramels: 20,
     damagePerShot: 1,
     autoShotsPerSecond: 1,
-    upgrades: []
+    upgrades: [],
+    numeroOleada: 1
+}
+
+function reducer(state, action) {
+
+    let nuevoEstado = { ...state }
+    
+
+
+    return nuevoEstado
+}
+
+export function Provider({ children }) {
+
+    const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            dispatch({ type: "SEGUNDO" })
+        }, 1000)
+
+        return () => clearInterval(timer)
+    }, [])
+
+    return (
+        <Context.Provider value={{
+            ...state,
+            dispararManual: () => dispatch({ type: "CLICK_SHOOT" }),
+            disparoAutomatico: () => dispatch({ type: "AUTO_SHOOT" }),
+            aumentoDisparosAutomaticos: () => dispatch({ type: "BUY_MULTIPLIER" }),
+            aumentoDanioPorDisparo: () => dispatch({ type: "BUY_DAMAGE_UPGRADE" }),
+            siguienteOleada: () => dispatch({ type: "NEXT_WAVE" })
+        }}>
+            {children}
+        </Context.Provider>
+    )
 }
